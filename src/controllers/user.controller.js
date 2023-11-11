@@ -43,6 +43,8 @@ const createUser = async (req, res) => {
         
         await User.create({ fullName, email, password: hashPassword, status: 'Active' })
 
+        // ada perubahan lagi
+
         res.status(201).json({ message: 'User created' })
     } catch (error) {
         res.status(500).json({ message: 'Internal Server Error' })
