@@ -25,6 +25,8 @@ const getAllUser = async (req, res) => {
 
         const total = await User.count()
 
+        // ada perubahan
+
         res.status(200).json({data: user, total: total})
     } catch (error) {
         res.status(500).json({ message: 'Internal Server Error' })
