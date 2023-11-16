@@ -29,6 +29,7 @@ const getAllUser = async (req, res) => {
 
     // ada perubahan
     // perubahan baru git
+    // perubahan baru di master
 
     res.status(200).json({ data: user, total })
   } catch (error) {
