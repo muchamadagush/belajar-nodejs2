@@ -1,7 +1,6 @@
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt')
 const { User } = require('../../models')
-const BuildResponse = require('../modules/BuildResponse')
 
 const login = async (req, res) => {
   try {
@@ -29,10 +28,7 @@ const login = async (req, res) => {
 
         const refreshToken = jwt.sign(payload, secretKey, { expiresIn: '15m' })
 
-        const response = { accessToken, refreshToken, user }
-        const buildResponse = BuildResponse.created({ response })
-
-        return res.status(201).json(buildResponse)
+        return res.status(201).json({ accessToken, refreshToken, user })
       }
       return res.status(400).json({ message: 'email atau password salah' })
     })
@@ -57,10 +53,7 @@ const refreshToken = (req, res) => {
 
       const newRefreshToken = jwt.sign(payload, secretKey, { expiresIn: '15m' })
 
-      const response = { accessToken, refreshToken: newRefreshToken }
-      const buildResponse = BuildResponse.created({ response })
-
-      return res.status(201).json(buildResponse)
+      return res.status(201).json({ accessToken, refreshToken: newRefreshToken })
     })
   } catch (error) {
     res.json({ message: 'Internal server error' })

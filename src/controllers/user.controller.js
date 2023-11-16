@@ -1,6 +1,6 @@
+/* eslint-disable radix */
 const bcrypt = require('bcrypt')
 const { User, Nation } = require('../../models')
-const BuildResponse = require('../modules/BuildResponse')
 
 const getAllUser = async (req, res) => {
   try {
@@ -28,9 +28,8 @@ const getAllUser = async (req, res) => {
     const total = await User.count()
 
     // ada perubahan
-    const buildResponse = BuildResponse.get({ data: user, total })
 
-    res.status(200).json(buildResponse)
+    res.status(200).json({ data: user, total })
   } catch (error) {
     res.status(500).json({ message: 'Internal Server Error' })
   }
@@ -50,9 +49,8 @@ const createUser = async (req, res) => {
 
     // perubahan juga
     // ada perubahan lagi
-    const buildResponse = BuildResponse.created({})
 
-    res.status(201).json(buildResponse)
+    res.status(201).json({})
   } catch (error) {
     res.status(500).json({ message: 'Internal Server Error' })
   }
@@ -75,9 +73,7 @@ const updateUser = async (req, res) => {
       fullName, email, status, NationId,
     }, { where: { id } })
 
-    const buildResponse = BuildResponse.updated({})
-
-    res.status(200).json(buildResponse)
+    res.status(200).json({})
   } catch (error) {
     console.error(error)
     res.status(500).json({ message: 'Internal Server Error' })
